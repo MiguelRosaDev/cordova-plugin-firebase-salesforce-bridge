@@ -1,0 +1,27 @@
+{
+  "name": "cordova-plugin-firebase-salesforce-bridge",
+  "version": "1.0.0",
+  "description": "Extension plugin to bridge Firebase Messaging and Salesforce Marketing Cloud SDK",
+  "cordova": {
+    "id": "cordova-plugin-firebase-salesforce-bridge",
+    "platforms": [
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MiguelRosaDev/cordova-plugin-firebase-salesforce-bridge.git"
+  },
+  "keywords": [
+    "cordova",
+    "firebase",
+    "salesforce",
+    "marketing-cloud",
+    "fcm",
+    "push",
+    "bridge",
+    "ecosystem:cordova"
+  ],
+  "author": "Miguel Rosa",
+  "license": "MIT"
+}
