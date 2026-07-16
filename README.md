@@ -1,46 +1,46 @@
 # cordova-plugin-firebase-salesforce-bridge
 
-Plugin Cordova de extensão que faz a ponte entre o plugin oficial de Firebase Messaging (**`cordova-plugin-firebase-messaging`**) e o **Salesforce Marketing Cloud SDK** (no Android).
+Cordova extension plugin that acts as a bridge between the official Firebase Messaging plugin (`cordova-plugin-firebase-messaging`) and the Salesforce Marketing Cloud SDK on Android.
 
-Este plugin permite manter o repositório oficial do Firebase Messaging intocado nas tuas aplicações OutSystems, encapsulando toda a customização do Salesforce Marketing Cloud SDK de forma isolada e limpa.
-
----
-
-## Como Funciona
-
-### 1. Android (Interceção Automática de Push e Tokens)
-O Firebase Cloud Messaging (FCM) apenas permite que um único serviço trate as mensagens e tokens recebidos. 
-
-Este plugin de extensão:
-* Utiliza a fusão de manifesto Android (`tools:node="remove"`) para remover a declaração do serviço padrão `FirebaseMessagingPluginService` registado pelo plugin oficial.
-* Regista o serviço personalizado `SalesforceFCMService` que herda diretamente de `FirebaseMessagingPluginService`.
-* Intercepta todas as mensagens de entrada. Se a mensagem for originária do Salesforce (`PushMessageManager.isMarketingCloudPush(remoteMessage)`), é tratada pelo SDK do Salesforce (`MarketingCloudSdk.handleMessage()`).
-* Caso contrário, delega o processamento da mensagem e o registo de tokens para o comportamento nativo oficial (`super.onMessageReceived()` / `super.onNewToken()`), garantindo que o comportamento padrão do Firebase (eventos de JS, etc.) continua a funcionar perfeitamente.
-
-### 2. Android (Sincronização de Tokens no Arranque)
-No arranque da aplicação, o plugin nativo solicita proativamente o token atual (cached) ao Firebase e envia-o imediatamente para o Salesforce Marketing Cloud SDK, prevenindo qualquer dessincronização de tokens.
-
-### 3. iOS (Comportamento Nativo do Salesforce SDK)
-Não é necessária qualquer alteração de código ou bridging manual no iOS. O SDK nativo do Salesforce Marketing Cloud para iOS utiliza *Method Swizzling* no `AppDelegate` para intercetar o registo de tokens e receção de notificações em background automaticamente.
+This plugin allows keeping the official OutSystems Firebase Messaging repository unmodified in your mobile applications, isolating all Salesforce Marketing Cloud SDK custom integrations in a clean, maintainable way.
 
 ---
 
-## Requisitos Prévios
+## How It Works
 
-1. O plugin oficial **`cordova-plugin-firebase-messaging`** (preferencialmente a versão oficial da OutSystems ou upstream estável) deve estar instalado.
-2. O **Salesforce Marketing Cloud SDK** deve estar integrado e inicializado na aplicação (seja através de outro plugin do Salesforce ou de configuração nativa). Os caminhos de classes `com.salesforce.marketingcloud.MarketingCloudSdk` devem estar disponíveis durante a compilação do Android.
+### 1. Android (Automatic Interception of Push Notifications & Tokens)
+Firebase Cloud Messaging (FCM) only allows a single service to handle incoming messages and token changes.
+
+This extension plugin:
+* Uses Android Manifest merging (`tools:node="remove"`) to remove the default `FirebaseMessagingPluginService` registered by the official plugin.
+* Registers a custom service `SalesforceFCMService` that extends `FirebaseMessagingPluginService`.
+* Intercepts all incoming messages. If the message originates from Salesforce (`PushMessageManager.isMarketingCloudPush(remoteMessage)`), it is handled by the Salesforce SDK (`MarketingCloudSdk.handleMessage()`).
+* Otherwise, it delegates message processing and token updates to the official native service (`super.onMessageReceived()` / `super.onNewToken()`), ensuring default Firebase behavior (such as Javascript events) continues to work.
+
+### 2. Android (Startup Token Synchronization)
+At application startup, the native plugin proactively requests the current token from Firebase and sends it to the Salesforce Marketing Cloud SDK, preventing any token mismatch.
+
+### 3. iOS (Salesforce SDK Native Behavior)
+No code modifications or manual bridging are required on iOS. The native Salesforce Marketing Cloud SDK for iOS uses *Method Swizzling* on the `AppDelegate` to automatically intercept token registration and background push notifications.
 
 ---
 
-## Instalação
+## Prerequisites
 
-Adiciona o plugin ao teu projeto Cordova/OutSystems utilizando o URL do repositório Git ou o nome local:
+1. The official **`cordova-plugin-firebase-messaging`** plugin must be installed.
+2. The **Salesforce Marketing Cloud SDK** must be integrated and initialized in the application (either through another Salesforce plugin or native configuration). The class paths `com.salesforce.marketingcloud.MarketingCloudSdk` must be available during Android compilation.
+
+---
+
+## Installation
+
+Add the plugin to your Cordova/OutSystems project using the Git repository URL:
 
 ```bash
 cordova plugin add cordova-plugin-firebase-salesforce-bridge
 ```
 
-No **OutSystems Integration Studio** ou no teu modelo de configuração JSON, adiciona a dependência Git ao teu repositório:
+In **OutSystems Integration Studio** or in your JSON configuration model, add the Git dependency to your repository:
 ```json
 {
     "plugin": {
@@ -51,6 +51,6 @@ No **OutSystems Integration Studio** ou no teu modelo de configuração JSON, ad
 
 ---
 
-## Licença
+## License
 
 MIT License.
