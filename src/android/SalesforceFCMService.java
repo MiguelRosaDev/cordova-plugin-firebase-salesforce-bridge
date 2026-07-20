@@ -5,7 +5,7 @@ import com.google.firebase.messaging.RemoteMessage;
 import com.salesforce.marketingcloud.MarketingCloudSdk;
 import com.salesforce.marketingcloud.messages.push.PushMessageManager;
 
-public class SalesforceFCMService extends com.outsystems.firebase.cloudmessaging.FirebaseMessagingReceiveService {
+public class SalesforceFCMService extends com.outsystems.firebase.messaging.FirebaseMessagingReceiveService {
 
     @Override
     public void onNewToken(@NonNull String token) {
