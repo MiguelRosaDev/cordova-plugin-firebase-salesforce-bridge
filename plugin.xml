@@ -18,7 +18,7 @@
     <platform name="android">
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
             <!-- Remove o serviço padrão do plugin de Firebase oficial da OutSystems -->
-            <service android:name="com.outsystems.firebase.messaging.FirebaseMessagingReceiveService" tools:node="remove" />
+            <service android:name="com.outsystems.plugins.firebase.messaging.FirebaseMessagingReceiveService" tools:node="remove" />
             
             <!-- Adiciona o nosso serviço customizado que herda do oficial -->
             <service android:name="com.salesforce.cordova.firebase.SalesforceFCMService" android:exported="true">
