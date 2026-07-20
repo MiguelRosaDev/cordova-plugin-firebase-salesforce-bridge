@@ -12,13 +12,13 @@
         <engine name="cordova-android" version=">=8.1.0" />
     </engines>
 
-    <!-- Dependência do plugin oficial do Firebase Messaging -->
-    <!-- <dependency id="com.outsystems.firebase.cloudmessaging" url="https://github.com/OutSystems/cordova-outsystems-firebase-cloud-messaging.git#2.6.0"/> -->
+    <!-- Dependência do plugin oficial do Firebase Messaging da OutSystems -->
+    <dependency id="com.outsystems.firebase.cloudmessaging" url="https://github.com/OutSystems/cordova-outsystems-firebase-cloud-messaging.git#2.6.0" />
 
     <platform name="android">
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
-            <!-- Remove o serviço padrão do plugin de Firebase oficial -->
-            <service android:name="by.chemerisuk.cordova.firebase.FirebaseMessagingPluginService" tools:node="remove" />
+            <!-- Remove o serviço padrão do plugin de Firebase oficial da OutSystems -->
+            <service android:name="com.outsystems.firebase.cloudmessaging.FirebaseMessagingReceiveService" tools:node="remove" />
             
             <!-- Adiciona o nosso serviço customizado que herda do oficial -->
             <service android:name="com.salesforce.cordova.firebase.SalesforceFCMService" android:exported="true">
