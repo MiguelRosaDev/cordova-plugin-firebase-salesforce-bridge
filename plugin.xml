@@ -13,7 +13,7 @@
     </engines>
 
     <!-- Dependência do plugin oficial do Firebase Messaging -->
-    <dependency id="com.outsystems.firebase.cloudmessaging" url="https://github.com/OutSystems/cordova-outsystems-firebase-cloud-messaging.git#2.6.0"/>
+    <!-- <dependency id="com.outsystems.firebase.cloudmessaging" url="https://github.com/OutSystems/cordova-outsystems-firebase-cloud-messaging.git#2.6.0"/> -->
 
     <platform name="android">
         <!-- Adiciona o namespace 'tools' ao AndroidManifest.xml -->
