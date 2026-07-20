@@ -16,11 +16,6 @@
     <!-- <dependency id="com.outsystems.firebase.cloudmessaging" url="https://github.com/OutSystems/cordova-outsystems-firebase-cloud-messaging.git#2.6.0"/> -->
 
     <platform name="android">
-        <!-- Adiciona o namespace 'tools' ao AndroidManifest.xml -->
-        <edit-config file="AndroidManifest.xml" target="/manifest" mode="merge">
-            <manifest xmlns:tools="http://schemas.android.com/tools" />
-        </edit-config>
-
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
             <!-- Remove o serviço padrão do plugin de Firebase oficial -->
             <service android:name="by.chemerisuk.cordova.firebase.FirebaseMessagingPluginService" tools:node="remove" />
